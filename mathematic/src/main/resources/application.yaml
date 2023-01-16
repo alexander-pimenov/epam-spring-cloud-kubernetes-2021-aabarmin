@@ -1,0 +1,35 @@
+server:
+  port: 0
+#  port: 8083
+
+#имя сервиса для Eureka - MATH
+# id приложения - желательно указывать всегда в микросервисных приложениях
+spring:
+  application:
+    name: MATH
+  config:
+    import: optional:configserver:${CONFIG_URL:http://localhost:8888/}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761/eureka}
+  # для того чтобы каждый инстанс имел уникальный id
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+math:
+  max: 100
+
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+
+
+

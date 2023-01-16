@@ -1,0 +1,22 @@
+При использовании создания докер образов с использованием SpringBoot maven plugin, нам нужно
+только описать это в pom.xml каждого модуля, например:
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <imageName>application/provider-math:oci</imageName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+т.е. DockerFile не нужно писать !!!
+SpringBoot maven plugin будет использовать Билд Пеки, которые позволяют собрать приложение правильным образом.
+
+Но что бы кастомизировать докер собранный с его помощью, т.е. войти внутрь и делать какие то манипуляции,
+нужно написать свой билдпэк, НО это не  очень просто!!!
+Поэтому смотрим другой пример - build-images-layered.sh
+
+
+
